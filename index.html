@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ngwitas Carpentry & Joinery Limited — Quality Work, Strong & Durable</title>
+  <meta name="description" content="Specialized in welding works, metal fabrication, carpentry and joinery in Zambia. Quality work, strong and durable." />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts: Oswald (display) + Inter (body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              red:    '#C0001A',
+              redDark:'#960015',
+              yellow: '#F5C200',
+              charcoal:'#1C1C1C',
+              dark:   '#111111',
+              offwhite:'#F9F9F9',
+            }
+          },
+          fontFamily: {
+            display: ['Oswald', 'sans-serif'],
+            body:    ['Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* ── Base ── */
+    * { box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; background: #F9F9F9; color: #1C1C1C; }
+    h1, h2, h3, h4 { font-family: 'Oswald', sans-serif; }
+
+    /* ── Hero diagonal slash (signature element) ── */
+    .hero-slash {
+      position: relative;
+    }
+    .hero-slash::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 100%;
+      height: 60px;
+      background: #F5C200;
+      clip-path: polygon(0 100%, 100% 0, 100% 100%);
+      z-index: 1;
+    }
+
+    /* ── Promo banner slash ── */
+    .promo-slash-top {
+      position: relative;
+    }
+    .promo-slash-top::before {
+      content: '';
+      position: absolute;
+      top: -1px;
+      left: 0;
+      width: 100%;
+      height: 60px;
+      background: #F9F9F9;
+      clip-path: polygon(0 0, 100% 0, 0 100%);
+      z-index: 2;
+    }
+
+    /* ── Spark texture overlay on hero ── */
+    .hero-bg {
+      background-color: #111111;
+      background-image:
+        radial-gradient(ellipse at 20% 50%, rgba(192,0,26,0.18) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 20%, rgba(245,194,0,0.10) 0%, transparent 55%);
+    }
+
+    /* ── Animated badge pulse ── */
+    @keyframes pulse-ring {
+      0%   { box-shadow: 0 0 0 0 rgba(245,194,0,0.55); }
+      70%  { box-shadow: 0 0 0 14px rgba(245,194,0,0); }
+      100% { box-shadow: 0 0 0 0 rgba(245,194,0,0); }
+    }
+    .pulse-badge { animation: pulse-ring 2s ease-out infinite; }
+
+    /* ── Product card hover ── */
+    .product-card {
+      transition: transform 0.22s ease, box-shadow 0.22s ease;
+    }
+    .product-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.13);
+    }
+
+    /* ── Price cross-out ── */
+    .price-original {
+      text-decoration: line-through;
+      opacity: 0.55;
+    }
+
+    /* ── Sticky WhatsApp FAB ── */
+    .whatsapp-fab {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 100;
+      border-radius: 9999px;
+      background: #25D366;
+      color: white;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 20px;
+      font-family: 'Oswald', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      box-shadow: 0 6px 24px rgba(0,0,0,0.22);
+      text-decoration: none;
+      transition: background 0.18s;
+    }
+    .whatsapp-fab:hover { background: #1ebc5a; }
+
+    /* ── Nav ── */
+    nav { position: sticky; top: 0; z-index: 50; }
+
+    /* ── Divider line ── */
+    .section-eyebrow {
+      display: inline-block;
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #C0001A;
+      border-left: 3px solid #F5C200;
+      padding-left: 10px;
+      margin-bottom: 10px;
+    }
+
+    /* ── Reduced motion ── */
+    @media (prefers-reduced-motion: reduce) {
+      .pulse-badge { animation: none; }
+      .product-card { transition: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════════════
+     NAVIGATION
+════════════════════════════════════════════════ -->
+<nav class="bg-brand-charcoal border-b-4 border-brand-red">
+  <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
+    <!-- Logo wordmark -->
+    <div class="flex flex-col leading-tight">
+      <span class="font-display text-white text-xl font-bold tracking-wide">NGWITAS</span>
+      <span class="font-display text-brand-yellow text-xs font-medium tracking-widest">CARPENTRY & JOINERY LTD</span>
+    </div>
+
+    <!-- Nav links (hidden on small screens) -->
+    <div class="hidden md:flex items-center gap-7">
+      <a href="#products" class="text-white font-display text-sm tracking-widest uppercase hover:text-brand-yellow transition-colors">Products</a>
+      <a href="#promo"    class="text-white font-display text-sm tracking-widest uppercase hover:text-brand-yellow transition-colors">Promo</a>
+      <a href="#contact"  class="text-white font-display text-sm tracking-widest uppercase hover:text-brand-yellow transition-colors">Contact</a>
+    </div>
+
+    <!-- CTA -->
+    <a href="https://wa.me/260975882250" target="_blank" rel="noopener"
+       class="bg-brand-red hover:bg-brand-redDark text-white font-display font-semibold text-sm tracking-wide uppercase px-4 py-2 rounded transition-colors">
+      Order Now
+    </a>
+  </div>
+</nav>
+
+
+<!-- ════════════════════════════════════════════════
+     HERO
+════════════════════════════════════════════════ -->
+<section class="hero-bg hero-slash relative overflow-hidden pt-20 pb-24 px-4">
+  <div class="max-w-4xl mx-auto relative z-10 text-center">
+
+    <!-- Eyebrow tag -->
+    <div class="inline-block bg-brand-yellow text-brand-charcoal font-display text-xs font-semibold tracking-widest uppercase px-4 py-1 rounded-full mb-6">
+      Zambia's Metal & Carpentry Specialists
+    </div>
+
+    <!-- Headline -->
+    <h1 class="font-display text-white text-5xl sm:text-6xl lg:text-7xl font-bold uppercase leading-tight mb-4">
+      Strong.<br />
+      <span class="text-brand-yellow">Durable.</span><br />
+      <span class="text-brand-red">Built to Last.</span>
+    </h1>
+
+    <!-- Subheadline -->
+    <p class="text-gray-300 text-lg sm:text-xl max-w-xl mx-auto mb-4 leading-relaxed">
+      Specialized in welding works, metal fabrication, carpentry, and joinery — crafted with precision for Zambian homes and businesses.
+    </p>
+
+    <!-- Slogan badge -->
+    <p class="inline-block font-display text-brand-yellow text-base sm:text-lg tracking-widest uppercase border border-brand-yellow/40 px-5 py-2 rounded mb-10">
+      "Quality Work — Strong &amp; Durable!"
+    </p>
+
+    <!-- CTAs -->
+    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+      <a href="https://wa.me/260975882250?text=Hello%2C%20I%27m%20interested%20in%20your%20products"
+         target="_blank" rel="noopener"
+         class="bg-brand-red hover:bg-brand-redDark text-white font-display font-semibold text-lg uppercase tracking-wide px-8 py-4 rounded transition-colors inline-flex items-center justify-center gap-2">
+        <!-- WhatsApp icon -->
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+          <path d="M12 0C5.373 0 0 5.373 0 12c0 2.107.549 4.088 1.514 5.808L.057 23.5a.5.5 0 0 0 .606.61l5.788-1.416A11.944 11.944 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.9a9.857 9.857 0 0 1-5.031-1.377l-.361-.214-3.737.914.94-3.638-.236-.374A9.856 9.856 0 0 1 2.1 12c0-5.468 4.432-9.9 9.9-9.9 5.469 0 9.9 4.432 9.9 9.9 0 5.469-4.431 9.9-9.9 9.9z"/>
+        </svg>
+        Order via WhatsApp
+      </a>
+      <a href="#products"
+         class="border-2 border-white/30 hover:border-brand-yellow text-white hover:text-brand-yellow font-display font-semibold text-lg uppercase tracking-wide px-8 py-4 rounded transition-colors">
+        View Products
+      </a>
+    </div>
+  </div>
+
+  <!-- Decorative spark lines -->
+  <div class="absolute top-10 right-10 opacity-10 pointer-events-none select-none" aria-hidden="true">
+    <div class="w-40 h-1 bg-brand-yellow rotate-45 mb-3"></div>
+    <div class="w-24 h-1 bg-brand-red rotate-45 ml-8"></div>
+    <div class="w-16 h-1 bg-brand-yellow rotate-45 ml-4 mt-3"></div>
+  </div>
+  <div class="absolute bottom-20 left-8 opacity-10 pointer-events-none select-none" aria-hidden="true">
+    <div class="w-28 h-1 bg-brand-yellow -rotate-45 mb-3"></div>
+    <div class="w-16 h-1 bg-brand-red -rotate-45 ml-6"></div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════════
+     PROMO BANNER
+════════════════════════════════════════════════ -->
+<section id="promo" class="bg-brand-yellow promo-slash-top relative pt-16 pb-12 px-4">
+  <div class="max-w-4xl mx-auto text-center relative z-10">
+
+    <!-- Pulse badge -->
+    <div class="inline-block pulse-badge bg-brand-red text-white font-display font-bold text-xs tracking-widest uppercase px-5 py-2 rounded-full mb-6">
+      🔥 Limited-Time Offer
+    </div>
+
+    <h2 class="font-display text-brand-charcoal text-4xl sm:text-5xl font-bold uppercase leading-tight mb-4">
+      Buy 3 or More —<br />
+      <span class="text-brand-red">Get the Promo Price!</span>
+    </h2>
+
+    <p class="text-brand-charcoal text-lg font-medium max-w-lg mx-auto mb-8">
+      Order any <strong>3 or more items</strong> and unlock our exclusive bulk pricing. Big savings on every piece.
+    </p>
+
+    <!-- Price comparison cards -->
+    <div class="flex flex-col sm:flex-row gap-4 justify-center items-center max-w-sm mx-auto sm:max-w-none">
+      <div class="bg-white/60 backdrop-blur rounded-xl px-8 py-5 text-center w-full sm:w-auto">
+        <p class="font-display text-xs tracking-widest uppercase text-gray-500 mb-1">Standard Price</p>
+        <p class="font-display text-3xl font-bold text-gray-400 line-through">K 4,500</p>
+        <p class="text-xs text-gray-400 mt-1">per item</p>
+      </div>
+      <div class="font-display text-3xl font-bold text-brand-red">→</div>
+      <div class="bg-brand-charcoal rounded-xl px-8 py-5 text-center w-full sm:w-auto shadow-xl">
+        <p class="font-display text-xs tracking-widest uppercase text-brand-yellow mb-1">Promo Price</p>
+        <p class="font-display text-3xl font-bold text-white">K 3,500</p>
+        <p class="text-xs text-brand-yellow mt-1">per item (3+ order)</p>
+      </div>
+    </div>
+
+    <p class="text-brand-charcoal text-sm mt-6 opacity-70">
+      Call or WhatsApp us to confirm your order and lock in the promo rate.
+    </p>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════════
+     PRODUCTS GRID
+════════════════════════════════════════════════ -->
+<section id="products" class="py-20 px-4 bg-brand-offwhite">
+  <div class="max-w-6xl mx-auto">
+
+    <!-- Section header -->
+    <div class="mb-12">
+      <span class="section-eyebrow">Our Work</span>
+      <h2 class="font-display text-brand-charcoal text-4xl sm:text-5xl font-bold uppercase leading-tight">
+        Featured Products
+      </h2>
+      <p class="text-gray-500 mt-3 max-w-md">
+        Every piece is welded, cut, and finished in our workshop. Built for Zambian conditions — tough, clean, and long-lasting.
+      </p>
+    </div>
+
+    <!-- Product grid — rendered by JS below -->
+    <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"></div>
+
+    <!-- WhatsApp CTA below grid -->
+    <div class="text-center mt-14">
+      <p class="text-gray-500 mb-4">Don't see what you need? We take custom orders.</p>
+      <a href="https://wa.me/260975882250?text=Hello%2C%20I%27d%20like%20to%20place%20a%20custom%20order"
+         target="_blank" rel="noopener"
+         class="inline-block bg-brand-charcoal hover:bg-black text-white font-display font-semibold text-base uppercase tracking-wide px-8 py-4 rounded transition-colors">
+        Request a Custom Item
+      </a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════════
+     WHY CHOOSE US
+════════════════════════════════════════════════ -->
+<section class="bg-brand-charcoal py-16 px-4">
+  <div class="max-w-5xl mx-auto">
+    <div class="mb-10 text-center">
+      <span class="section-eyebrow text-brand-yellow border-brand-red">Why Ngwitas</span>
+      <h2 class="font-display text-white text-3xl sm:text-4xl font-bold uppercase mt-1">Built Different</h2>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+      <div class="border border-white/10 rounded-xl p-6 hover:border-brand-yellow/40 transition-colors">
+        <div class="text-brand-yellow text-3xl mb-3">⚙️</div>
+        <h3 class="font-display text-white text-xl font-semibold mb-2">Expert Fabrication</h3>
+        <p class="text-gray-400 text-sm leading-relaxed">Skilled welders and craftsmen with years of hands-on experience in metal and wood works.</p>
+      </div>
+      <div class="border border-white/10 rounded-xl p-6 hover:border-brand-yellow/40 transition-colors">
+        <div class="text-brand-yellow text-3xl mb-3">🛡️</div>
+        <h3 class="font-display text-white text-xl font-semibold mb-2">Strong & Durable</h3>
+        <p class="text-gray-400 text-sm leading-relaxed">We use quality materials and rigorous finishing so your furniture and metalwork stands the test of time.</p>
+      </div>
+      <div class="border border-white/10 rounded-xl p-6 hover:border-brand-yellow/40 transition-colors">
+        <div class="text-brand-yellow text-3xl mb-3">📦</div>
+        <h3 class="font-display text-white text-xl font-semibold mb-2">Bulk-Order Friendly</h3>
+        <p class="text-gray-400 text-sm leading-relaxed">The more you order, the better the price. Perfect for contractors, schools, and businesses.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════════
+     CONTACT & LOCATION FOOTER
+════════════════════════════════════════════════ -->
+<footer id="contact" class="bg-brand-dark text-white pt-16 pb-10 px-4">
+  <div class="max-w-5xl mx-auto">
+
+    <!-- Top row -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-10 mb-12">
+
+      <!-- Branding column -->
+      <div>
+        <p class="font-display text-2xl font-bold text-white tracking-wide mb-1">NGWITAS</p>
+        <p class="font-display text-brand-yellow text-xs tracking-widest uppercase mb-4">Carpentry & Joinery Limited</p>
+        <p class="text-gray-400 text-sm leading-relaxed">Specialized in welding works, metal fabrication, carpentry and joinery across Zambia.</p>
+        <p class="font-display text-brand-red text-sm font-semibold uppercase tracking-widest mt-4">"Quality Work — Strong &amp; Durable!"</p>
+      </div>
+
+      <!-- Contact column -->
+      <div>
+        <h4 class="font-display text-white text-lg font-semibold uppercase tracking-widest mb-4 border-b border-white/10 pb-2">Contact Us</h4>
+        <div class="space-y-3">
+          <a href="tel:+260975882250"
+             class="flex items-center gap-3 text-gray-300 hover:text-brand-yellow transition-colors group">
+            <span class="text-brand-yellow text-lg">📞</span>
+            <span class="text-sm">+260 975 882 250</span>
+          </a>
+          <a href="tel:+260974847918"
+             class="flex items-center gap-3 text-gray-300 hover:text-brand-yellow transition-colors">
+            <span class="text-brand-yellow text-lg">📞</span>
+            <span class="text-sm">+260 974 847 918</span>
+          </a>
+          <a href="https://wa.me/260975882250" target="_blank" rel="noopener"
+             class="flex items-center gap-3 text-gray-300 hover:text-brand-yellow transition-colors">
+            <span class="text-lg">💬</span>
+            <span class="text-sm">WhatsApp Order</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Locations column -->
+      <div>
+        <h4 class="font-display text-white text-lg font-semibold uppercase tracking-widest mb-4 border-b border-white/10 pb-2">Find Us</h4>
+        <ul class="space-y-3 text-sm text-gray-300">
+          <li class="flex gap-2">
+            <span class="text-brand-yellow mt-0.5 shrink-0">📍</span>
+            <span><strong class="text-white">Workshop 1:</strong><br />Alick Nkata Road, Kasupe High Breed</span>
+          </li>
+          <li class="flex gap-2">
+            <span class="text-brand-yellow mt-0.5 shrink-0">📍</span>
+            <span><strong class="text-white">Workshop 2:</strong><br />Mumbwa Road, Opposite Chabota — Work Shop In Middle</span>
+          </li>
+          <li class="flex gap-2">
+            <span class="text-brand-yellow mt-0.5 shrink-0">📍</span>
+            <span><strong class="text-white">Area:</strong><br />West Namalombwe Area</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Bottom bar -->
+    <div class="border-t border-white/10 pt-6 flex flex-col sm:flex-row justify-between items-center gap-3 text-xs text-gray-500">
+      <p>&copy; 2025 Ngwitas Carpentry & Joinery Limited. All rights reserved.</p>
+      <p>Zambia 🇿🇲 — Built for durability.</p>
+    </div>
+  </div>
+</footer>
+
+
+<!-- ════════════════════════════════════════════════
+     STICKY WHATSAPP FAB
+════════════════════════════════════════════════ -->
+<a href="https://wa.me/260975882250?text=Hello%2C%20I%27m%20interested%20in%20your%20products"
+   target="_blank" rel="noopener"
+   class="whatsapp-fab"
+   aria-label="Chat on WhatsApp">
+  <!-- WhatsApp SVG icon -->
+  <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 fill-current shrink-0" viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+    <path d="M12 0C5.373 0 0 5.373 0 12c0 2.107.549 4.088 1.514 5.808L.057 23.5a.5.5 0 0 0 .606.61l5.788-1.416A11.944 11.944 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.9a9.857 9.857 0 0 1-5.031-1.377l-.361-.214-3.737.914.94-3.638-.236-.374A9.856 9.856 0 0 1 2.1 12c0-5.468 4.432-9.9 9.9-9.9 5.469 0 9.9 4.432 9.9 9.9 0 5.469-4.431 9.9-9.9 9.9z"/>
+  </svg>
+  <span class="hidden sm:inline">WhatsApp Us</span>
+</a>
+
+
+<!-- ════════════════════════════════════════════════
+     JAVASCRIPT — PRODUCT CATALOG
+════════════════════════════════════════════════ -->
+<script>
+  // ╔══════════════════════════════════════════════════════════╗
+  // ║              PRODUCT CATALOG — EDIT HERE                ║
+  // ╠══════════════════════════════════════════════════════════╣
+  // ║  To ADD a new product:                                   ║
+  // ║    1. Copy one object below (from the opening { to })    ║
+  // ║    2. Paste it after the last item (before the ] )       ║
+  // ║    3. Add a comma after the object above it              ║
+  // ║    4. Update the fields (id, name, prices, imageSrc,     ║
+  // ║       description, and optionally badge)                 ║
+  // ║                                                          ║
+  // ║  imageSrc: use a relative path like "images/bed.jpg"     ║
+  // ║            or a full URL to an online image.             ║
+  // ║            Leave as "" to show the placeholder.         ║
+  // ║                                                          ║
+  // ║  Set badge: "" to hide the badge on a product.          ║
+  // ╚══════════════════════════════════════════════════════════╝
+
+  const products = [
+
+    // ── PRODUCT 1 ── (from flyer — update imageSrc when you have a real photo)
+    {
+      id: 1,
+      name: "Metal Bed Frame",
+      originalPrice: 4500,          // Standard price in ZMW (Kwacha)
+      promoPrice: 3500,             // Promo price when buying 3+ (ZMW)
+      imageSrc: "",                 // ← Replace with: "images/bed-frame.jpg" or a URL
+      description: "Heavy-duty welded steel bed frame. Available in single, double, and queen sizes. Powder-coated finish for rust resistance.",
+      badge: "Featured",            // Short label shown on the card (e.g. "Popular", "New"). Set "" to hide.
+    },
+
+    // ── PRODUCT 2 ── (placeholder — swap details as needed)
+    {
+      id: 2,
+      name: "Steel Security Gate",
+      originalPrice: 6500,
+      promoPrice: 5500,
+      imageSrc: "",                 // ← Replace with: "images/security-gate.jpg"
+      description: "Custom-welded security gates for homes and businesses. Designed to match your wall width and painted to your colour choice.",
+      badge: "Popular",
+    },
+
+    // ── PRODUCT 3 ── (placeholder)
+    {
+      id: 3,
+      name: "Metal Wardrobe",
+      originalPrice: 5000,
+      promoPrice: 4200,
+      imageSrc: "",                 // ← Replace with: "images/wardrobe.jpg"
+      description: "Sturdy metal wardrobe with lockable door. Ideal for hostels, schools, and homes. Can be customized with shelves or drawers.",
+      badge: "New",
+    },
+
+    // ── PRODUCT 4 ── (placeholder)
+    {
+      id: 4,
+      name: "Wooden Dining Set",
+      originalPrice: 8500,
+      promoPrice: 7000,
+      imageSrc: "",                 // ← Replace with: "images/dining-set.jpg"
+      description: "Handcrafted wooden dining table with 4 or 6 matching chairs. Varnished finish. Custom dimensions available on request.",
+      badge: "",
+    },
+
+    // ┌──────────────────────────────────────────────────────┐
+    // │  ADD YOUR NEXT PRODUCT BELOW THIS LINE               │
+    // │  (copy one block above, paste here, update fields)   │
+    // └──────────────────────────────────────────────────────┘
+
+  ]; // ← End of products array. Do not delete this closing bracket.
+
+
+  // ════════════════════════════════════════════════════════════
+  //  RENDER ENGINE — No need to edit below this line
+  //  (unless you want to change the card layout)
+  // ════════════════════════════════════════════════════════════
+
+  /**
+   * Generates a placeholder SVG when no imageSrc is provided.
+   * Swap out for a real <img> once you have product photos.
+   */
+  function placeholderSVG(name) {
+    return `
+      <div class="w-full h-52 bg-gray-100 flex flex-col items-center justify-center gap-2">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+            d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+        </svg>
+        <p class="text-gray-300 text-xs font-medium text-center px-4">${name}</p>
+        <p class="text-gray-200 text-xs">Add image to show here</p>
+      </div>`;
+  }
+
+  /**
+   * Formats a Zambian Kwacha price: 4500 → "K 4,500"
+   */
+  function formatPrice(amount) {
+    return 'K ' + amount.toLocaleString('en-ZM');
+  }
+
+  /**
+   * Builds and injects a product card into the DOM.
+   */
+  function renderProducts() {
+    const grid = document.getElementById('product-grid');
+    if (!grid) return;
+
+    grid.innerHTML = products.map(product => {
+      const imageHTML = product.imageSrc
+        ? `<img src="${product.imageSrc}" alt="${product.name}" class="w-full h-52 object-cover" loading="lazy" />`
+        : placeholderSVG(product.name);
+
+      const badgeHTML = product.badge
+        ? `<span class="absolute top-3 left-3 bg-brand-red text-white font-display text-xs font-semibold uppercase tracking-widest px-3 py-1 rounded-full">${product.badge}</span>`
+        : '';
+
+      const savingsAmount = product.originalPrice - product.promoPrice;
+
+      return `
+        <div class="product-card bg-white rounded-2xl overflow-hidden shadow-md border border-gray-100 flex flex-col">
+
+          <!-- Image -->
+          <div class="relative overflow-hidden">
+            ${imageHTML}
+            ${badgeHTML}
+          </div>
+
+          <!-- Body -->
+          <div class="p-5 flex flex-col flex-1">
+            <h3 class="font-display text-brand-charcoal text-xl font-semibold uppercase leading-tight mb-2">
+              ${product.name}
+            </h3>
+            <p class="text-gray-500 text-sm leading-relaxed flex-1 mb-4">
+              ${product.description}
+            </p>
+
+            <!-- Pricing -->
+            <div class="mb-4">
+              <div class="flex items-center gap-3 flex-wrap">
+                <span class="price-original text-gray-400 font-display text-base">
+                  ${formatPrice(product.originalPrice)}
+                </span>
+                <span class="font-display text-brand-red text-2xl font-bold">
+                  ${formatPrice(product.promoPrice)}
+                </span>
+              </div>
+              <p class="text-xs text-gray-400 mt-1">
+                Save <strong class="text-brand-red">${formatPrice(savingsAmount)}</strong> on promo (3+ items)
+              </p>
+            </div>
+
+            <!-- CTA -->
+            <a href="https://wa.me/260975882250?text=Hello%2C%20I%27m%20interested%20in%20the%20${encodeURIComponent(product.name)}"
+               target="_blank" rel="noopener"
+               class="block w-full text-center bg-brand-charcoal hover:bg-brand-red text-white font-display font-semibold text-sm uppercase tracking-widest py-3 rounded-xl transition-colors duration-200 mt-auto">
+              Order via WhatsApp
+            </a>
+          </div>
+        </div>
+      `;
+    }).join('');
+  }
+
+  // Run on page load
+  renderProducts();
+</script>
+
+</body>
+</html>
